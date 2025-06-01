@@ -19,7 +19,6 @@ def test_health_check(client):
 def test_data_endpoint(client):
     """Test the data endpoint"""
     response = client.get('/api/data')
-    # Since we have random errors, we should accept both 200 and 500
     assert response.status_code in [200, 500]
     data = response.get_json()
     
