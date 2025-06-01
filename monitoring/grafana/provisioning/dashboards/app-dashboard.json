@@ -1,0 +1,86 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": null,
+  "panels": [
+    {
+      "type": "stat",
+      "id": 1,
+      "title": "Request Rate (req/s)",
+      "datasource": "Prometheus",
+      "targets": [
+        { "expr": "sum(rate(app_request_count_total[1m]))", "refId": "A" }
+      ],
+      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 0 },
+      "fieldConfig": { "defaults": { "unit": "req/s" }, "overrides": [] }
+    },
+    {
+      "type": "stat",
+      "id": 2,
+      "title": "Error Rate (5xx %)",
+      "datasource": "Prometheus",
+      "targets": [
+        { "expr": "sum(rate(app_request_count_total{http_status=~\"5..\"}[1m])) / sum(rate(app_request_count_total[1m])) * 100", "refId": "A" }
+      ],
+      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 0 },
+      "fieldConfig": { "defaults": { "unit": "percent" }, "overrides": [] }
+    },
+    {
+      "type": "stat",
+      "id": 3,
+      "title": "CPU Usage (s)",
+      "datasource": "Prometheus",
+      "targets": [
+        { "expr": "process_cpu_seconds_total", "refId": "A" }
+      ],
+      "gridPos": { "h": 4, "w": 6, "x": 12, "y": 0 },
+      "fieldConfig": { "defaults": { "unit": "s" }, "overrides": [] }
+    },
+    {
+      "type": "stat",
+      "id": 4,
+      "title": "Memory Usage (MB)",
+      "datasource": "Prometheus",
+      "targets": [
+        { "expr": "process_resident_memory_bytes / 1024 / 1024", "refId": "A" }
+      ],
+      "gridPos": { "h": 4, "w": 6, "x": 18, "y": 0 },
+      "fieldConfig": { "defaults": { "unit": "megabytes" }, "overrides": [] }
+    },
+    {
+      "type": "timeseries",
+      "id": 5,
+      "title": "Request Latency (P50, P90, P99)",
+      "datasource": "Prometheus",
+      "targets": [
+        { "expr": "histogram_quantile(0.5, sum(rate(app_request_latency_seconds_bucket[1m])) by (le))", "legendFormat": "P50", "refId": "A" },
+        { "expr": "histogram_quantile(0.9, sum(rate(app_request_latency_seconds_bucket[1m])) by (le))", "legendFormat": "P90", "refId": "B" },
+        { "expr": "histogram_quantile(0.99, sum(rate(app_request_latency_seconds_bucket[1m])) by (le))", "legendFormat": "P99", "refId": "C" }
+      ],
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 4 },
+      "fieldConfig": { "defaults": { "unit": "s" }, "overrides": [] }
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 27,
+  "style": "dark",
+  "tags": ["SRE", "Essential"],
+  "templating": { "list": [] },
+  "time": { "from": "now-15m", "to": "now" },
+  "title": "Essential SRE Metrics Dashboard",
+  "version": 2
+} 
