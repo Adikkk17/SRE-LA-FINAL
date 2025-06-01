@@ -9,10 +9,6 @@ This guide will help you set up the SRE Demo Project on your local machine or in
 - Terraform (if deploying to AWS)
 - AWS account (if deploying to cloud)
 
-## Local Development Setup
-
-### 1. Clone the Repository
-
 ```bash
 git clone https://github.com/adikkk17/SRE-LA-FINAL.git
 cd SRE-LA-FINAL
