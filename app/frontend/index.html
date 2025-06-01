@@ -30,13 +30,10 @@
             const [refreshCount, setRefreshCount] = React.useState(0);
 
             React.useEffect(() => {
-                // Fetch health status
                 fetch('http://localhost:5000/api/health')
                     .then(response => response.json())
                     .then(data => setHealth(data))
                     .catch(error => setHealth({ status: 'error', timestamp: Date.now() }));
-                
-                // Fetch data
                 fetch('http://localhost:5000/api/data')
                     .then(response => {
                         if (!response.ok) {
