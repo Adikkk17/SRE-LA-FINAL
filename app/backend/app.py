@@ -9,11 +9,9 @@ from prometheus_client import Counter, Histogram, start_http_server
 app = Flask(__name__)
 CORS(app)
 
-# Prometheus metrics
 REQUEST_COUNT = Counter('app_request_count', 'Total app HTTP request count', ['method', 'endpoint', 'http_status'])
 REQUEST_LATENCY = Histogram('app_request_latency_seconds', 'Request latency in seconds', ['method', 'endpoint'])
 
-# Start prometheus metrics server on port 8000
 start_http_server(8000)
 
 @app.route('/')
