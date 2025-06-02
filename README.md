@@ -31,4 +31,4 @@ See individual component directories for detailed instructions:
 
 ## Project Status
 
-This project fulfills the requirements for the SRE Final Project for the SE-2331 course. 
+This project fulfills the requirements for the SRE Final Project for the SE-2303 course. 
